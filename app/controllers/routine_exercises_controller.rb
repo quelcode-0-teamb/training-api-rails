@@ -4,13 +4,13 @@ class RoutineExercisesController < ApplicationController
   before_action :check_auth_user
 
   def create
-    render json: RoutineExercise.add_exercises(@routine, routine_exercise_params)
+    render json: RoutineExercise.add_exercises(@routine, routine_exercise_params), status: :created
   end
 
   def destroy
     exercise = RoutineExercise.find(params[:routine_exercise_id])
     exercise.destroy!
-    render json: { "message": '削除しました' }
+    render :no_content
   end
 
   private

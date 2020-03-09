@@ -1,0 +1,52 @@
+# URL
+@url = {{local_url}}
+
+@local_url = localhost:3000
+@heroku_url = https://mukimukiroku.herokuapp.com
+
+# TOKEN
+@u1_token = {{local_u1_token}}
+
+@local_u1_token = bpeTNu7vTjeH8CmfXwoqokLG
+@heroku_u1_token = bpeTNu7vTjeH8CmfXwoqokLG
+
+
+
+###
+GET /
+Host: {{url}}
+
+###
+# Users
+@u1_id = 1
+## users#sign_up
+POST /sign_up
+Host: {{url}}
+Content-Type: application/json
+
+{ 
+  "sign_up_params":{
+  "name":"masaoaao",
+  "email":"masaaa@gmail.com",
+  "password":"1",
+  "password_confirmation":"1",
+  "user_private":"false"
+  }
+}
+
+
+###
+## users#sign_in
+POST /sign_in
+Host: {{url}}
+Content-Type: application/json
+Authorization: Bearer {{u1_token}}
+
+{ 
+  "sign_in_params":{
+  "sign_in_text":"kingmasa",
+  "password":"1"
+  }
+}
+
+###

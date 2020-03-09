@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   # ユーザー登録
   def sign_up
     user = User.create!(sign_up_params)
-    render json: user.as_json
+    render json: user.as_json, status: :created
   end
 
   # ログイン
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   # ユーザー消去
   def destroy
     @user.destroy!
-    render json: :status
+    render status: :no_content
   end
 
   def show

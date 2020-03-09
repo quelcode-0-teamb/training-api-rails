@@ -7,12 +7,12 @@ class RoutinesController < ApplicationController
     routine = Routine.new(routine_params)
     routine.user = @current_user
     routine.save!
-    render json: routine
+    render status: :created
   end
 
   def destroy
     @routine.destroy
-    render json: { "message": '削除しました' }
+    render status: :no_content
   end
 
   def update

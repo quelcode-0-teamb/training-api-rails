@@ -5,7 +5,7 @@ class ScoresController < ApplicationController
   def create
     set_num = params[:sets].to_i
     score = Score.add_exercise_to_scores(score_params, set_num, params[:id], current_user)
-    render json: score.as_json
+    render status: :created
   end
 
   def update
@@ -16,12 +16,12 @@ class ScoresController < ApplicationController
 
   def destroy
     @score.destroy!
-    render json: { "message": '削除しました' }
+    render status: :no_content
   end
 
   def routine_score
     Score.add_routine_scores(params[:routine_score_params], current_user)
-    render json: { "message": '記録しました' }
+    render status: :created
   end
 
   private
