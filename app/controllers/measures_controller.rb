@@ -8,13 +8,13 @@ class MeasuresController < ApplicationController
     measure = Measure.new(measure_params)
     measure.user = @current_user
     measure.save!
-    render json: measure
+    render status: :created
   end
 
   # 記録の消去
   def destroy
     @measure.destroy!
-    render json: { "message": '削除しました' }
+    render status: :no_content
   end
 
   # 計測記録の作成

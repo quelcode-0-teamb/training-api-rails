@@ -5,12 +5,12 @@ class ExercisesController < ApplicationController
 
   def create
     exercise = current_user.exercises.create(exercise_params)
-    render json: exercise
+    render json: exercise, status: :created
   end
 
   def destroy
     @exercise.destroy!
-    render json: { 'message': '種目を削除しました！' }
+    render status: :no_content
   end
 
   def update
