@@ -12,20 +12,14 @@ class UsersController < ApplicationController
   # ユーザー登録
   def sign_up
     user = User.create!(sign_up_params)
-    render json: user.as_json
+    render json: user.as_json, status: :created
   end
 
   # ログイン
   def sign_in
     sign_in_check(params[:sign_in_params][:sign_in_text])
-    if @data.blank?
-      raise(ActiveRecord::RecordNotFound, 'ユーザー名、emailが見つかりません') and return
-    end
-    if @data.authenticate(params[:sign_in_params][:password])
-      render json: @data.as_json
-    else
-      raise(ActionController::BadRequest, 'パスワードが間違っています') and return
-    end
+    raise(ActiveRecord::RecordNotFound, 'ユーザー名、emailが見つかりません') if @data.blank?
+    raise(ActionController::BadRequest, 'パスワードが間違っています') unless @data.authenticate(params[:sign_in_params][:password])
   end
 
   # ユーザー情報変更
@@ -38,7 +32,7 @@ class UsersController < ApplicationController
   # ユーザー消去
   def destroy
     @user.destroy!
-    render json: :status
+    render status: :no_content
   end
 
   def show
