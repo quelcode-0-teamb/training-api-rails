@@ -18,14 +18,8 @@ class UsersController < ApplicationController
   # ログイン
   def sign_in
     sign_in_check(params[:sign_in_params][:sign_in_text])
-    if @data.blank?
-      raise(ActiveRecord::RecordNotFound, 'ユーザー名、emailが見つかりません') and return
-    end
-    if @data.authenticate(params[:sign_in_params][:password])
-      render json: @data.as_json
-    else
-      raise(ActionController::BadRequest, 'パスワードが間違っています') and return
-    end
+    raise(ActiveRecord::RecordNotFound, 'ユーザー名、emailが見つかりません') if @data.blank?
+    raise(ActionController::BadRequest, 'パスワードが間違っています') unless @data.authenticate(params[:sign_in_params][:password])
   end
 
   # ユーザー情報変更
