@@ -26,8 +26,8 @@ Content-Type: application/json
 
 { 
   "sign_up_params":{
-  "name":"masaoaao",
-  "email":"masaaa@gmail.com",
+  "name":"masaoassao",
+  "email":"masaassa@gmail.com",
   "password":"1",
   "password_confirmation":"1",
   "user_private":"false"
