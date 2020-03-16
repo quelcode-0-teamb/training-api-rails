@@ -48,7 +48,7 @@ class UsersController < ApplicationController
   end
 
   def measures
-    render json: @user.measures
+    render json: @user.measures.date_desc
   end
 
   def followings

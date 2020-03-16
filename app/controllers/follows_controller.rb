@@ -8,16 +8,15 @@ class FollowsController < ApplicationController
     user = User.find(params[:id])
     if user.user_private
       current_user.follow_request(user)
-      render json: { "message": 'フォローリクエストしました' }
     else
       current_user.follow(user)
-      render json: { "message": 'フォローしました' }
     end
+      render status: :created
   end
 
   def destroy
     @current_user.unfollow(@user)
-    render json: { "message": 'フォロー解除しました' }
+    render status: :no_content
   end
 
   private

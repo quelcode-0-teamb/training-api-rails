@@ -14,14 +14,14 @@ class FollowRequestsController < ApplicationController
     ActiveRecord::Base.transaction do
       @request_user.follow(@current_user)
       @request_user.request_cancel(@current_user)
-      render json: { "message": 'フォローリクエストを承認しました' }
+      render stasus: :created
     end
   end
 
   # フォローリクエスト拒否
   def destroy
     @request_user.request_cancel(@current_user)
-    render json: { "message": 'フォローリクエストを拒否しました' }
+    render status: :no_content
   end
 
   # 送ったフォローリクエスト一覧
@@ -32,7 +32,7 @@ class FollowRequestsController < ApplicationController
   # フォローリクエスト取り消し
   def my_request_cancel
     @current_user.request_cancel(@request_user)
-    render json: { "message": 'フォローリクエストを取り消しました' }
+    render status: :no_content
   end
 
   private
